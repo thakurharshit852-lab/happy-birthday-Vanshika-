@@ -10,7 +10,7 @@
 
 ![Live Demo](https://img.shields.io/badge/🎁%20Open%20Surprise-Click%20Here-ff69b4?style=for-the-badge)
 
-](https://thakurharshit852-lab.github.io/happy-birthday-Vanshika-/?name=Vanshika)
+](https://thakurharshit852-lab.github.io/birthday-wishes-/)
 
 <br>
 
