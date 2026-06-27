@@ -161,6 +161,65 @@
     }
     footer span { color: var(--rose); }
 
+    /* ── Quiz Section ── */
+    .quiz-section {
+      padding: 4rem 1.5rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .quiz-question {
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .quiz-btn {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 16px;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      padding: 1rem 0.8rem;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+      backdrop-filter: blur(6px);
+    }
+    .quiz-btn:hover { transform: scale(1.05); border-color: var(--rose); }
+    .quiz-btn:active { transform: scale(0.96); }
+    .quiz-btn.selected {
+      background: linear-gradient(135deg, var(--rose), var(--lilac));
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+    .quiz-result {
+      display: none;
+      background: linear-gradient(135deg, rgba(255,107,157,0.15), rgba(192,132,252,0.15));
+      border: 1px solid rgba(255,107,157,0.4);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .quiz-result.show { display: block; }
+    .result-emoji { font-size: 3rem; display: block; margin-bottom: 0.8rem; }
+    .quiz-result p {
+      font-size: clamp(1.1rem, 4vw, 1.4rem);
+      font-family: 'Dancing Script', cursive;
+      color: var(--rose);
+      line-height: 1.6;
+    }
+    @keyframes popIn {
+      0%   { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+
     /* ── Balloon burst ── */
     .balloons { position: fixed; bottom: -120px; left: 0; width: 100%; z-index: 0; pointer-events: none; display: flex; justify-content: space-around; }
     .balloon {
@@ -215,6 +274,22 @@
         <span class="icon">❤️</span>
         <p>You deserve all the love, laughter, and magic the universe has to offer.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- Fun Question Section -->
+  <section class="quiz-section">
+    <h2 class="section-title">🙋 A Little Question...</h2>
+    <p class="quiz-question">How do you feel around me?</p>
+    <div class="quiz-options" id="quiz-options">
+      <button class="quiz-btn" onclick="showAnswer(this)">🛡️ Safe</button>
+      <button class="quiz-btn" onclick="showAnswer(this)">👏😊 Nice</button>
+      <button class="quiz-btn" onclick="showAnswer(this)">❤️ Lovely</button>
+      <button class="quiz-btn" onclick="showAnswer(this)">😑 Boring</button>
+    </div>
+    <div class="quiz-result" id="quiz-result">
+      <span class="result-emoji">💖</span>
+      <p>Vishnu is best in the world and I love Vishnu 😍🌟</p>
     </div>
   </section>
 
@@ -328,6 +403,16 @@
     });
     if (pieces.length) requestAnimationFrame(animateConfetti);
     else animating = false;
+  }
+
+  /* ── Quiz ── */
+  function showAnswer(btn) {
+    document.querySelectorAll('.quiz-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    const result = document.getElementById('quiz-result');
+    result.classList.add('show');
+    result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    spawnConfetti();
   }
 
   /* ── Auto-launch on load ── */
